@@ -11,23 +11,48 @@
 <body>
   <h1>Угадай число!</h1>
   <p>Я загадал число от 1 до 100. Попробуй угадать!</p>
-  <input type="number" id="guess" placeholder="Введи число">
+
+  <input type="number" id="guess" placeholder="Введи число" />
   <button onclick="checkGuess()">Проверить</button>
+  <button onclick="resetGame()">Сыграть снова</button>
+
   <p id="result"></p>
+  <p>Попыток: <span id="attempts">0</span></p>
 
   <script>
-    const secretNumber = Math.floor(Math.random() * 100) + 1;
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
     function checkGuess() {
       const guess = parseInt(document.getElementById("guess").value);
       const result = document.getElementById("result");
+      const attemptsElement = document.getElementById("attempts");
+
+      if (isNaN(guess)) {
+        result.textContent = "Пожалуйста, введи число!";
+        return;
+      }
+
+      attempts++;
+      attemptsElement.textContent = attempts;
+
       if (guess === secretNumber) {
-        result.textContent = "Поздравляю! Ты угадал!";
+        result.textContent = `Поздравляю! Ты угадал число ${secretNumber} за ${attempts} попыток.`;
       } else if (guess < secretNumber) {
         result.textContent = "Загаданное число больше.";
       } else {
         result.textContent = "Загаданное число меньше.";
       }
     }
+
+    function resetGame() {
+      secretNumber = Math.floor(Math.random() * 100) + 1;
+      attempts = 0;
+      document.getElementById("attempts").textContent = attempts;
+      document.getElementById("result").textContent = "";
+      document.getElementById("guess").value = "";
+    }
   </script>
 </body>
 </html>
+
