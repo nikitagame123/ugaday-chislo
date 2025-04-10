@@ -4,18 +4,23 @@
   <meta charset="UTF-8">
   <title>Угадай число</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; background: #f0f0f0; }
-    input, button { padding: 8px; margin: 5px; }
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+    }
   </style>
 </head>
 <body>
   <h1>Угадай число!</h1>
   <p>Я загадал число от 1 до 100. Попробуй угадать!</p>
-
-  <input type="number" id="guess" placeholder="Введи число" />
+  <input type="number" id="guess" placeholder="Введи число">
   <button onclick="checkGuess()">Проверить</button>
   <button onclick="resetGame()">Сыграть снова</button>
-
   <p id="result"></p>
   <p>Попыток: <span id="attempts">0</span></p>
 
@@ -26,18 +31,18 @@
     function checkGuess() {
       const guess = parseInt(document.getElementById("guess").value);
       const result = document.getElementById("result");
-      const attemptsElement = document.getElementById("attempts");
+      const attemptsSpan = document.getElementById("attempts");
 
-      if (isNaN(guess)) {
-        result.textContent = "Пожалуйста, введи число!";
+      if (!guess) {
+        result.textContent = "Пожалуйста, введите число!";
         return;
       }
 
       attempts++;
-      attemptsElement.textContent = attempts;
+      attemptsSpan.textContent = attempts;
 
       if (guess === secretNumber) {
-        result.textContent = `Поздравляю! Ты угадал число ${secretNumber} за ${attempts} попыток.`;
+        result.textContent = "Поздравляю! Ты угадал!";
       } else if (guess < secretNumber) {
         result.textContent = "Загаданное число больше.";
       } else {
@@ -55,4 +60,3 @@
   </script>
 </body>
 </html>
-
